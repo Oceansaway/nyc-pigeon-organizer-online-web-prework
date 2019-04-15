@@ -1,31 +1,22 @@
-pigeon_data = {
-        :color => {
-          :purple => ["Theo", "Peter Jr.", "Lucky"],
-          :grey => ["Theo", "Peter Jr.", "Ms. K"],
-          :white => ["Queenie", "Andrew", "Ms. K", "Alex"],
-          :brown => ["Queenie", "Alex"]
-        },
-        :gender => {
-          :male => ["Alex", "Theo", "Peter Jr.", "Andrew", "Lucky"],
-          :female => ["Queenie", "Ms. K"]
-        },
-        :lives => {
-          "Subway" => ["Theo", "Queenie"],
-          "Central Park" => ["Alex", "Ms. K", "Lucky"],
-          "Library" => ["Peter Jr."],
-          "City Hall" => ["Andrew"]
-        }
-      }
+def nyc_pigeon_organizer(data)
+  # write your code here!
+  new_hash = {}
+  data.each do |property, hash|
+    hash.each do |attribute, array|
+      array.each do |name|
+        if !new_hash.has_key?(name)
+          new_hash[name] = {}
+        end
 
-      def nyc_pigeon_organizer(data)
-  	  data.each do |key,values|
-    values.each do |value,names|
-      names.each do |name|
-        pigeon_list[name] ||= {}
-        pigeon_list[name][key] ||= []
-        pigeon_list[name][key] << value.to_s
+        if !new_hash[name].has_key?(property)
+          new_hash[name][property] = []
+        end
+
+        if !new_hash[name][property].include?(attribute)
+          new_hash[name][property] << attribute.to_s
+        end
       end
     end
   end
-  pigeon_list
+  new_hash
 end
